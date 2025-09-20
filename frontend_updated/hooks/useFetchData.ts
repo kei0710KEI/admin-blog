@@ -1,8 +1,21 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function useFetchData(apiEndpoint) {
-  const [alldata, setAlldata] = useState([]);
+interface Blog {
+  _id: string;
+  title: string;
+  slug: string;
+  status: string;
+  [key: string]: any;
+}
+
+interface UseFetchDataReturn {
+  alldata: Blog[];
+  loading: boolean;
+}
+
+function useFetchData(apiEndpoint: string): UseFetchDataReturn {
+  const [alldata, setAlldata] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
 
@@ -31,7 +44,7 @@ function useFetchData(apiEndpoint) {
         setAlldata(alldata);
         setLoading(false); // Set loading state to false after data is fetched
       } catch (error) {
-        console.error('Error fetching blog data:', error);
+        console.error("Error fetching blog data:", error);
         setLoading(false); // Set loading state to false even if there's an error
       }
     };
@@ -40,7 +53,6 @@ function useFetchData(apiEndpoint) {
     if (apiEndpoint) {
       fetchAllData();
     }
-
   }, [initialLoad, apiEndpoint]); // Depend on initialLoad and apiEndpoint to trigger API call
 
   return { alldata, loading };

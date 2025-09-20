@@ -1,7 +1,8 @@
-// components/ScrollToTopButton.js
+// components/ScrollToTopButton.tsx
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { FaArrowUp } from 'react-icons/fa6';
+import React, { useState, useEffect } from "react";
+import { FaArrowUp } from "react-icons/fa6";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +11,7 @@ const ScrollToTopButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -25,19 +26,19 @@ const ScrollToTopButton = () => {
 
   // Add scroll event listener when component mounts
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <button
-      className={`scrollToTop ${isVisible ? 'show' : 'hide'}`}
+      className={`scrollToTop ${isVisible ? "show" : "hide"}`}
       onClick={scrollToTop}
       title="Go to top"
     >
-     <FaArrowUp />
+      <FaArrowUp />
     </button>
   );
 };
